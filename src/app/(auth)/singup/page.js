@@ -3,6 +3,10 @@
 import { useState } from 'react'
 import Input from '@/components/ui/Input'
 import Button from '@/components/ui/Button'
+import { createClient } from '@/lib/supabase/client'
+
+const supabase = createClient()
+
 
 
 export default function SignUpPage() {
@@ -16,12 +20,12 @@ export default function SignUpPage() {
       email,
       password,
       options: {
-        emailRedirectTo: `${location.origin}/auth/callback`,
+        emailRedirectTo: `${location.origin}/login`,
       },
     })
 
     if (error) {
-      setMessage("Erro: " + error.message)
+      setMessage("Erro: Cadastro não confere" + error.message)
     } else {
       setMessage("Verifique seu e-mail para confirmar o cadastro.")
     }
@@ -32,26 +36,30 @@ export default function SignUpPage() {
       <form onSubmit={handleSignUp} className="bg-white p-6 rounded shadow-md w-full max-w-sm">
         <h2 className="text-2xl mb-4 text-center">Cadastro</h2>
 
-       <Input
-                 type="email"
-                 label="Email"
-                 value={email}
-                 onChange={(e) => setEmail(e.target.value)}
-                 placeholder="Digite seu email"
-               />
-       
-               <Input
-                 type="password"
-                 label="Senha"
-                 value={password}
-                 onChange={(e) => setPassword(e.target.value)}
-                 placeholder="Digite sua senha"
-               />
-       
-                <div className="flex justify-center mt-4">
-                  <Button type="submit">Cadastrar</Button>
-              </div>
-             </form>
-           </div>
+        <Input
+          type="email"
+          label="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Digite seu email"
+        />
+
+        <Input
+          type="password"
+          label="Senha"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Digite sua senha"
+        />
+
+        <div className="flex justify-center mt-4">
+          <Button type="submit">Cadastrar</Button>
+        </div>
+
+        {message && (
+          <p className="mt-4 text-center text-sm text-red-600">{message}</p>
+        )}
+      </form>
+    </div>
   )
 }
