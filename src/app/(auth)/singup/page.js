@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from 'react'
+import Input from '@/components/ui/Input'
+import Button from '@/components/ui/Button'
 
 
 export default function SignUpPage() {
@@ -30,30 +32,26 @@ export default function SignUpPage() {
       <form onSubmit={handleSignUp} className="bg-white p-6 rounded shadow-md w-full max-w-sm">
         <h2 className="text-2xl mb-4 text-center">Cadastro</h2>
 
-        <input
-          type="email"
-          className="w-full border border-gray-300 rounded px-3 py-2 mb-4"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-
-        <input
-          type="password"
-          className="w-full border border-gray-300 rounded px-3 py-2 mb-4"
-          placeholder="Senha"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-
-        <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded">
-          Cadastrar
-        </button>
-
-        {message && <p className="mt-4 text-center text-sm text-red-500">{message}</p>}
-      </form>
-    </div>
+       <Input
+                 type="email"
+                 label="Email"
+                 value={email}
+                 onChange={(e) => setEmail(e.target.value)}
+                 placeholder="Digite seu email"
+               />
+       
+               <Input
+                 type="password"
+                 label="Senha"
+                 value={password}
+                 onChange={(e) => setPassword(e.target.value)}
+                 placeholder="Digite sua senha"
+               />
+       
+                <div className="flex justify-center mt-4">
+                  <Button type="submit">Cadastrar</Button>
+              </div>
+             </form>
+           </div>
   )
 }
